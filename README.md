@@ -266,3 +266,4 @@ Use `Object.keys` to loop through a state collection.
     .map(key => <Fish key={key} details={this.state.fishes[key]} />)
 }
 ```
+
