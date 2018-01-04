@@ -272,6 +272,37 @@ Use `Object.keys` to loop through a state collection.
 **Dont ever touch the key of a React component.**
 Pass down a method to a lower component by sending it via props.
 
+### Diplaying order state with JSX
+
+Sometimes we can create our own render function when the one from react gets to big.
+Dont forget to bind it in your constructor if you want to use `this` inside your function.
+
+```js
+this.renderOrder = this.renderOrder.bind(this);
+
+...
+
+renderOrder(key) {
+  const fish = this.props.fishes[key];
+  const count = this.props.order[key];
+
+  if (!fish || fish.status === 'unavailable') {
+    return <li key={key}>Sorry, {fish ? fish.name : 'fish'} is no longer available!</li>
+  }
+
+  return(
+    <li key={key}>
+      <span>{count}lbs {fish.name}</span>
+      <span className="price">{formatPrice(count * fish.price)}</span>
+    </li>
+  )
+}
+
+...
+
+{orderIds.map(this.renderOrder)}
+```
+
 ### Bugs
 
 - setting price to “free” renders “$NaN”
