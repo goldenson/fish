@@ -303,6 +303,45 @@ renderOrder(key) {
 {orderIds.map(this.renderOrder)}
 ```
 
+### Persisting our state with Firebase
+
+One giant object database in real time made by google.
+
+Lets talk about React lifecycle:
+
+When a component is being mounted or rendered there is different entry points where we can hook into and do various things like AJAX requests or connecting to firebase in our example ...
+
+Create a `base.js` file:
+
+```js
+import Rebase from 're-base';
+
+const base = Rebase.createClass({
+  apiKey: "lefngwoigilsngorbnfrsugeg",
+  authDomain: "fish-react-603e1.firebaseapp.com",
+  databaseURL: "https://fish-react-603e1.firebaseio.com",
+});
+
+export default base;
+```
+
+Use react hooks to sync states:
+
+```js
+componentWillMount() {
+  this.ref = base.syncState(`${this.props.params.storeId}/fishes`,
+    {
+      context: this,
+      state: 'fishes'
+    }
+  );
+}
+
+componentWillUnmount() {
+  base.removeBinding(this.ref);
+}
+```
+
 ### Bugs
 
 - setting price to “free” renders “$NaN”
