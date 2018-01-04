@@ -269,7 +269,7 @@ Use `Object.keys` to loop through a state collection.
 
 ### Updating order state
 
-Dont ever touch the key of an React component.
+**Dont ever touch the key of a React component.**
 Pass down a method to a lower component by sending it via props.
 
 ### Bugs
