@@ -267,3 +267,12 @@ Use `Object.keys` to loop through a state collection.
 }
 ```
 
+### Updating order state
+
+Dont ever touch the key of an React component.
+Pass down a method to a lower component by sending it via props.
+
+### Bugs
+
+- setting price to “free” renders “$NaN”
+- and no default image
