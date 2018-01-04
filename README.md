@@ -342,6 +342,31 @@ componentWillUnmount() {
 }
 ```
 
+### Persisting order state with LocalStorage
+
+LocalStorage is a key value pair and has no expiration time.
+
+Small native js database on client side.
+
+We are using `JSON.parse` and `JSON.stringify` because we can not store nested object with localstorage.
+
+```js
+...
+const localStorageRef = localStorage.getItem(`order-${this.props.params.storeId}`);
+
+if (localStorage) {
+  this.setState({
+    order: JSON.parse(localStorageRef)
+  });
+}
+
+...
+
+componentWillUpdate(nextProps, nextState) {
+  localStorage.setItem(`order-${this.props.params.storeId}`, JSON.stringify(nextState.order))
+}
+```
+
 ### Bugs
 
 - setting price to “free” renders “$NaN”
